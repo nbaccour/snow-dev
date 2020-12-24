@@ -13,14 +13,14 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class DefaultController
 {
-    /**
-     * @Route("/", name="index")
-     */
-    public function index()
-    {
-
-        dump('ça fonctionne');
-        die();
-    }
+//    /**
+//     * @Route("/", name="index")
+//     */
+//    public function index()
+//    {
+//
+//        dump('ça fonctionne');
+//        die();
+//    }
 
 }
