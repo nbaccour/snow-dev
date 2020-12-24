@@ -1,5 +1,5 @@
 # snow-dev
-## Création d'un site communautaire de partage de figures de snowboard via le framework Symfony.
+ Création d'un site communautaire de partage de figures de snowboard via le framework Symfony.
 
 ## Environnement utilisé durant le développement
 
