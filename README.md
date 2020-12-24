@@ -15,7 +15,7 @@
 
 ## Installation
 *  Clonez ou téléchargez le repository GitHub dans le dossier voulu :
-*     git clone https://github.com/nbaccour/snow-dev
+*     https://github.com/nbaccour/snow-dev.git
 * Configurez vos variables d'environnement tel que la connexion à la base de données ou votre serveur SMTP ou adresse mail dans le fichier .env.local qui devra être crée à la racine du projet en réalisant une copie du fichier .env.
 
 * Téléchargez et installez les dépendances back-end du projet avec Composer :
