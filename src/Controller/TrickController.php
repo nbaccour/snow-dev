@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Trick;
 use App\Repository\CategoryRepository;
+use App\Repository\TrickRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -26,5 +28,19 @@ class TrickController extends AbstractController
             'slug'     => $slug,
             'category' => $category,
         ]);
+    }
+
+    /**
+     * @Route("/{category_slug}/{slug}", name="trick_show")
+     */
+    public function show($slug, TrickRepository $trickRepository)
+    {
+        $trick = $trickRepository->findOneBy(['slug' => $slug]);
+
+        if (!$trick) {
+            throw $this->createNotFoundException("La figure demandée n'existe pas");
+        }
+
+        return $this->render('trick/trick.html.twig', ['trick' => $trick]);
     }
 }

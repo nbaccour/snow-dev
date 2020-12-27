@@ -1,9 +1,13 @@
 {% extends 'base.html.twig' %}
 {% block title %}
-    Tricks : {{ slug }}
+    Catégorie : {{ category.name }}
 {% endblock %}
 
 {% block body %}
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ path('homepage') }}">Accueil</a></li>
+        <li class="breadcrumb-item active">{{ category.name }}</li>
+    </ol>
     <h1> Catégorie : {{ category.name }}</h1>
     <div class="row">
         {% for trick in category.tricks %}
@@ -14,7 +18,8 @@
                         <h4 class="card-title">{{ trick.name }}</h4>
                         <span class="badge badge-info">{{ category.name }}</span>
                         <p class="card-text">{{ trick.description }}</p>
-                        <a href="#" class="btn btn-primary btn-sm">Détails</a>
+                        <a href="{{ path('trick_show', {'category_slug':category.slug, 'slug':trick.slug}) }}"
+                           class="btn btn-primary btn-sm">Détails</a>
                     </div>
                 </div>
             </div>
