@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+    Tricks : {{ slug }}
+{% endblock %}
+
+{% block body %}
+    <h1> Catégorie : {{ category.name }}</h1>
+    <div class="row">
+        {% for trick in category.tricks %}
+            <div class="col-3">
+                <div class="card">
+                    <img src="{{ trick.picture }}" class="img-fluid" alt="trick">
+                    <div class="card-body">
+                        <h4 class="card-title">{{ trick.name }}</h4>
+                        <span class="badge badge-info">{{ category.name }}</span>
+                        <p class="card-text">{{ trick.description }}</p>
+                        <a href="#" class="btn btn-primary btn-sm">Détails</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    {#Catégorie : {{ slug }}#}
+{% endblock %}
