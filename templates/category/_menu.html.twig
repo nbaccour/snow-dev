@@ -1,0 +1,3 @@
+{% for categorie in categories %}
+    <a class="dropdown-item" href="{{ path('trick_category', {'slug':categorie.slug}) }}">{{ categorie.name }}</a>
+{% endfor %}

@@ -9,6 +9,7 @@
 namespace App\Controller;
 
 
+use App\Repository\TrickRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -17,8 +18,9 @@ class HomeController extends AbstractController
     /**
      * @Route("/", name="homepage")
      */
-    public function homepage()
+    public function homepage(TrickRepository $trickRepository)
     {
-        return $this->render('home.html.twig');
+        $tricks = $trickRepository->findBy([], [], 3);
+        return $this->render('home.html.twig', ['tricks' => $tricks]);
     }
 }

@@ -40,7 +40,7 @@ class TrickController extends AbstractController
         if (!$trick) {
             throw $this->createNotFoundException("La figure demandée n'existe pas");
         }
-
+//        dd($trick);
         return $this->render('trick/trick.html.twig', ['trick' => $trick]);
     }
 }

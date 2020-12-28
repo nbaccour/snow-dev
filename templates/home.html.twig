@@ -1,12 +1,29 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    Home
+    SnowTricks
 {% endblock %}
 
+{% block slide %}
+    <img src="img/slide-5.jpg" class="img-fluid" alt="">
+{% endblock %}
 {% block body %}
-    <h1>Page d'accueil</h1>
-    <p><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci autem, cumque cupiditate dolores earum excepturi itaque laboriosam nisi, optio, porro praesentium quam qui recusandae repellat reprehenderit sequi similique vero voluptatibus!</span><span>Aliquam architecto cupiditate eaque et nobis recusandae velit! Alias aperiam asperiores, consectetur delectus dignissimos distinctio doloribus expedita ipsum obcaecati odio porro praesentium quam quibusdam soluta tempora tenetur, ut velit vitae?</span><span>A aliquam animi asperiores culpa dignissimos dolore dolores dolorum et ex exercitationem illo iure laudantium, magnam modi nisi obcaecati quam quia recusandae rem saepe similique, tenetur ullam vel vero vitae!</span><span>Consequatur, quis recusandae? Accusantium aliquam asperiores, aut commodi consectetur culpa dicta dolores enim est eveniet harum ipsam itaque magni minus nemo nisi obcaecati placeat, quibusdam quo reiciendis reprehenderit tenetur totam!</span><span>Ab amet asperiores aspernatur atque blanditiis commodi consectetur culpa dicta dolorem doloremque enim error est eveniet ex fuga id, ipsum laboriosam minus mollitia nisi provident, quidem ratione repellat soluta tempore.</span><span>Accusamus alias aperiam aut, eaque error est eveniet excepturi harum labore neque odit provident, quaerat quos rerum tempore? Aperiam at atque consequatur consequuntur doloremque maxime nam necessitatibus sed, velit veniam?</span><span>Aliquid blanditiis est harum, non porro quam quisquam! Commodi, consequuntur dicta doloremque earum eos fugiat illo, maxime officia pariatur possimus quas quasi qui, quia quod sed sit velit voluptatum! Deserunt.</span><span>Consequatur corporis, eaque et ipsum optio quidem sit. Alias, animi at dignissimos eius, eligendi eos error esse hic illo incidunt iure iusto necessitatibus neque perferendis, placeat sequi unde velit voluptate.</span><span>Ab consequuntur, culpa, dolore ea error illo ipsam laborum laudantium magnam, nesciunt possimus quis rerum vel vitae voluptates. Ab, aliquam cumque eligendi est impedit ipsum iure laboriosam nulla quasi veritatis?</span><span>Accusantium ad aperiam consequatur delectus distinctio ducimus ea est et eum nihil, non odit quae qui sunt vero voluptate voluptates. Accusamus itaque maiores quibusdam voluptatum? Ad atque distinctio fuga necessitatibus.</span><span>Debitis distinctio doloribus eveniet molestiae nihil perferendis quo, quos ratione suscipit unde? Alias animi autem dolores incidunt ipsa ipsam nisi, numquam officia perspiciatis provident quae quas quia reprehenderit repudiandae sint!</span><span>Aliquam autem consequuntur enim fuga, id inventore ipsam magni neque officiis, provident quo, sunt velit! Animi atque culpa cumque cupiditate doloremque ipsum maiores natus, nihil porro qui, repellat sed, voluptatum.</span><span>A, animi aperiam, beatae consectetur culpa dolore dolorem doloribus ducimus eius eos illum impedit incidunt itaque molestias mollitia necessitatibus nisi nobis omnis perferendis perspiciatis rem unde velit veritatis vitae voluptatem.</span><span>Amet animi, aperiam aspernatur cum doloribus eligendi facilis fuga magnam nemo, ratione repellat voluptas voluptatem voluptates! Cum eius fugiat libero magnam omnis. Accusamus deserunt in ipsum magnam minus nemo, sit.</span><span>Ab aliquid, amet architecto asperiores at, dolores eveniet facere laborum magni maiores, nesciunt qui quos rem rerum sapiente tempora unde? Corporis delectus dolorum ducimus eius nemo numquam placeat sed, soluta?</span>
-    </p>
+    <h1>Top Tricks</h1>
+    <div class="row">
+        {% for trick in tricks %}
+            <div class="col-4">
+                <div class="card">
+                    <img src="{{ trick.picture }}" class="img-fluid" alt="trick">
+                    <div class="card-body">
+                        <h4 class="card-title">{{ trick.name }}</h4>
+                        <span class="badge badge-info">{{ trick.category.name }}</span>
+                        <p class="card-text">{{ trick.description }}</p>
+                        <a href="{{ path('trick_show', {'category_slug':trick.category.slug, 'slug':trick.slug}) }}"
+                           class="btn btn-primary btn-sm">Détails</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 
 {% endblock %}

@@ -20,11 +20,11 @@ class AppFixtures extends Fixture
 
     public function load(ObjectManager $manager)
     {
-        $categoryName = ['Grabs', 'Rotations', 'Flips', 'Rotations désaxées', 'Slides', 'One foot', 'Old school'];
+        $categoryName = ['Grabs', 'Rotations', 'Flips', 'Rotations désaxées', 'Slides', 'One foot'];
         $tricksName = ['Mute', 'Indy', '360', '720', 'Backflip', 'Misty', 'Tail slide', 'Method air', 'Backside air'];
 
         $faker = \Faker\Factory::create('FR-fr');
-//        $aCategory = [];
+        $aCategory = [];
         foreach ($categoryName as $name) {
 
             $category = new Category();
@@ -32,8 +32,10 @@ class AppFixtures extends Fixture
                 ->setSlug(strtolower($this->slugger->slug($category->getName())));
 
             $manager->persist($category);
-//            $aCategory[] = $category;
+            $aCategory[] = $category;
+        }
 
+        foreach ($aCategory as $categorie) {
             for ($i = 0; $i <= mt_rand(5, 15); $i++) {
 
                 $trick = new Trick();
@@ -42,13 +44,11 @@ class AppFixtures extends Fixture
                     ->setSlug(strtolower($this->slugger->slug($trick->getName())))
                     ->setCreatAt($faker->dateTimeBetween('-6 months'))
                     ->setPicture('img/tricks/img' . $faker->numberBetween(1, 39) . '.jpg')
-                    ->setCategory($category);
+                    ->setCategory($categorie);
 
                 $manager->persist($trick);
 
             }
-
-
         }
 
 
