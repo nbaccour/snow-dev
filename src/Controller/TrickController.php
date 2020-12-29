@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class TrickController extends AbstractController
 {
     /**
-     * @Route("/{slug}", name="trick_category")
+     * @Route("/{slug}", name="trick_category", priority=-1)
      */
     public function category($slug, CategoryRepository $categoryRepository): Response
     {
