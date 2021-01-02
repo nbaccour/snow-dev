@@ -4,13 +4,19 @@
 
 {% block body %}
     <h1>Connexion</h1>
-    {% if error %}
-        <div class="alert alert-danger">
-            {{ error.message }}
+
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
         </div>
+    {% endfor %}
+
+    {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'messages') }}</div>
     {% endif %}
     {{ form_start(formView) }}
     {{ form_widget(formView) }}
     <button type="submit" class="btn btn-success">Connexion</button>
     {{ form_end(formView) }}
+    <a href="">Mot de passe oublié</a>
 {% endblock %}

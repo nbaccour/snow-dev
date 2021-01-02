@@ -13,6 +13,7 @@
         {% for trick in category.tricks %}
             <div class="col-3">
                 <div class="card">
+                    {{ dump(trick.picture) }}
                     <img src="{{ trick.picture }}" class="img-fluid" alt="trick">
                     <div class="card-body">
                         <h4 class="card-title">{{ trick.name }}</h4>
