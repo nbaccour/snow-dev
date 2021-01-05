@@ -43,4 +43,29 @@ class TrickController extends AbstractController
 //        dd($trick);
         return $this->render('trick/trick.html.twig', ['trick' => $trick]);
     }
+
+    /**
+     * @Route("/mytricks", name="trick_mytricks")
+     */
+    public function myTricks(TrickRepository $trickRepository)
+    {
+        $user = $this->getUser();
+        return $this->render('/user/trickList.html.twig', ['tricks' => $user->getTricks()]);
+
+    }
+
+    /**
+     * @Route("/modify/{id}", name="trick_modify")
+     */
+    public function modify($id, TrickRepository $trickRepository)
+    {
+        $user = $this->getUser();
+
+        $trick = $trickRepository->find($id);
+
+
+
+        return $this->render('/user/modifyTrick.html.twig', ['trick'=>$user->getTricks()]);
+
+    }
 }

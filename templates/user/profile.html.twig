@@ -1,0 +1,21 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    Profile
+{% endblock %}
+{% block body %}
+    {#{{ dump(formView) }}#}
+    {% include "shared/_flashSuccess.html.twig" %}
+    <h1>Votre Profil </h1>
+    {{ form_start(formProfilView) }}
+    {{ form_widget(formProfilView) }}
+    <button type="submit" class="btn btn-success">Modifier</button>
+    {{ form_end(formProfilView) }}
+    <hr>
+    <h3>Modifier mon mot de passe </h3>
+    {{ form_start(formPassword) }}
+    {{ form_widget(formPassword) }}
+    <button type="submit" class="btn btn-success">Modifier mon mot de passe</button>
+    {{ form_end(formPassword) }}
+
+{% endblock %}

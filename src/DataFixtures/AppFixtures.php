@@ -32,18 +32,21 @@ class AppFixtures extends Fixture
         $admin->setEmail("admin@gmail.com")
             ->setFullName("admin")
             ->setPassword($hash)
+            ->setVerifPassword($hash)
             ->setRoles(['ROLE_ADMIN']);
 
         $manager->persist($admin);
-
+        $aUsers = [];
         for ($u = 0; $u < 5; $u++) {
             $user = new User();
             $hash = $this->encoder->encodePassword($user, "password");
             $user->setEmail("user$u@gmail.com")
                 ->setFullName($faker->name())
-                ->setPassword($hash);
+                ->setPassword($hash)
+                ->setVerifPassword($hash);
 
             $manager->persist($user);
+            $aUsers[] = $user;
         }
 
         $categoryName = ['Grabs', 'Rotations', 'Flips', 'Rotations désaxées', 'Slides', 'One foot'];
@@ -70,6 +73,7 @@ class AppFixtures extends Fixture
                     ->setSlug(strtolower($this->slugger->slug($trick->getName())))
                     ->setCreatAt($faker->dateTimeBetween('-6 months'))
                     ->setPicture('img/tricks/img' . $faker->numberBetween(1, 39) . '.jpg')
+                    ->setUser($faker->randomElement($aUsers))
                     ->setCategory($categorie);
 
                 $manager->persist($trick);

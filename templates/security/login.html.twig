@@ -5,11 +5,7 @@
 {% block body %}
     <h1>Connexion</h1>
 
-    {% for message in app.flashes('success') %}
-        <div class="alert alert-success">
-            {{ message }}
-        </div>
-    {% endfor %}
+    {% include "shared/_flashSuccess.html.twig" %}
 
     {% if error %}
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'messages') }}</div>

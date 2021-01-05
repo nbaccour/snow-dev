@@ -3,11 +3,16 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @UniqueEntity(fields={"email"}, message="L'email que vous avez indiqué est déjà utilisé !")
  */
 class User implements UserInterface
 {
@@ -20,6 +25,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Assert\Email()
      */
     private $email;
 
@@ -34,10 +40,27 @@ class User implements UserInterface
      */
     private $password;
 
+
     /**
      * @ORM\Column(type="string", length=255)
      */
     private $fullName;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\EqualTo(propertyPath="password",message="Les 2 mots de passe doivent correspondre", groups={"verif-pwd"})
+     */
+    private $verifPassword;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Trick::class, mappedBy="user")
+     */
+    private $tricks;
+
+    public function __construct()
+    {
+        $this->tricks = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -63,7 +86,7 @@ class User implements UserInterface
      */
     public function getUsername(): string
     {
-        return (string) $this->email;
+        return (string)$this->email;
     }
 
     /**
@@ -90,7 +113,7 @@ class User implements UserInterface
      */
     public function getPassword(): string
     {
-        return (string) $this->password;
+        return (string)$this->password;
     }
 
     public function setPassword(string $password): self
@@ -125,6 +148,48 @@ class User implements UserInterface
     public function setFullName(string $fullName): self
     {
         $this->fullName = $fullName;
+
+        return $this;
+    }
+
+    public function getVerifPassword(): ?string
+    {
+        return $this->verifPassword;
+    }
+
+    public function setVerifPassword(?string $verifPassword): self
+    {
+        $this->verifPassword = $verifPassword;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Trick[]
+     */
+    public function getTricks(): Collection
+    {
+        return $this->tricks;
+    }
+
+    public function addTrick(Trick $trick): self
+    {
+        if (!$this->tricks->contains($trick)) {
+            $this->tricks[] = $trick;
+            $trick->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTrick(Trick $trick): self
+    {
+        if ($this->tricks->removeElement($trick)) {
+            // set the owning side to null (unless already changed)
+            if ($trick->getUser() === $this) {
+                $trick->setUser(null);
+            }
+        }
 
         return $this;
     }

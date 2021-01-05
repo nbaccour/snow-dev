@@ -14,13 +14,34 @@
     <h1>Figure : {{ trick.name }}</h1>
     <div class="row">
         <div class="col-4">
-            {{ dump(trick.picture) }}
+
             <img src="../{{ trick.picture }}" class="img-fluid" alt="Image de {{ trick.name }}">
         </div>
         <div class="col">
             <span class="badge badge-primary">{{ trick.category.name }}</span>
             <p> {{ trick.description }}</p>
         </div>
+    </div>
+    <div class="row mx-auto pt-5 pb-5">
+        <div class="col-md-8 ml-auto mr-auto">
+            {% if app.user %}
+                <div class="brand text-center">
+                </div>
+            {% else %}
+                <div class="brand text-center">
+                    <h5>Réagissez ! Laissez votre commentaire</h5>
+                    <h5>Vous n'êtes pas enregistré.</h5>
+                    <h5>Veuillez vous authentifier ou enregistrez vous si vous n'êtes pas déjà inscrit !</h5>
+
+                </div>
+                <div class="col text-center">
+                    <a href="{{ path("security_login") }}" class="btn btn-success">SE CONNECTER</a>
+                    <a href="{{ path("user_registration") }}" class="btn btn-success">S'ENREGISTRER</a>
+                </div>
+            {% endif %}
+
+        </div>
+
     </div>
 
 {% endblock %}

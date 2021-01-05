@@ -1,0 +1,16 @@
+<div class="row">
+    {% for trick in tricks %}
+        <div class="col-4">
+            <div class="card">
+                <img src="{{ trick.picture }}" class="img-fluid" alt="trick">
+                <div class="card-body">
+                    <h4 class="card-title">{{ trick.name }}</h4>
+                    <span class="badge badge-info">{{ trick.category.name }}</span>
+                    <p class="card-text">{{ trick.description }}</p>
+                    <a href="{{ path('trick_show', {'category_slug':trick.category.slug, 'slug':trick.slug}) }}"
+                       class="btn btn-primary btn-sm">Détails</a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
